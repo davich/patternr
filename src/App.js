@@ -36,7 +36,7 @@ function App() {
     <div className="App">
       <Lights up={light} gameState={gameState} click={buttonClick}></Lights>
       <button onClick={() => start()}>Start</button>
-      <button onClick={() => start()}>Replay</button>
+      <button onClick={() => playPattern(pattern)}>Replay</button>
     </div>
   );
 }

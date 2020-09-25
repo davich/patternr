@@ -1,7 +1,25 @@
 .Lights {
-  border: 1px solid red;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  max-width: 800px;
+  margin: 50px auto;
+  height: 50px
 }
 
 .light.up {
+  background-color: red;
+}
+.light {
+  border: 1px solid black;
+  width: 20%
+}
+
+.light:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.light:active {
   background-color: red;
 }

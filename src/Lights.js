@@ -8,7 +8,7 @@ export default function Lights(props) {
   var lights = []
   for (var i = 1; i < 5; ++i) {
     const klass = (parseInt(props.up) === i) ? "light up" : "light"
-    lights.push(<div className={klass} key={i} onClick={click(i)}>{i}</div>);
+    lights.push(<div className={klass} key={i} onClick={click(i)}></div>);
   }
 
   return (
