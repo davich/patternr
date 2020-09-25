@@ -1,0 +1,7 @@
+.Lights {
+  border: 1px solid red;
+}
+
+.light.up {
+  background-color: red;
+}
