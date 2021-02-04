@@ -13,7 +13,7 @@ interface State {
 interface Action {
   type: string;
   number?: number;
-  timeout?: any;
+  timeout?: number;
 }
 
 const reducer = (state: State, action: Action): State => {
@@ -46,12 +46,12 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-function usePrevious(value: any): any {
-  const ref = useRef();
+function usePrevious<T>(value: T): T {
+  const ref = useRef<T>();
   useEffect(() => {
     ref.current = value;
   });
-  return ref.current;
+  return ref.current as T;
 }
 
 function App() {
@@ -66,17 +66,17 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const start = () => {
-    setTimeout(() => tick(), 1000);
+    window.setTimeout(() => tick(), 1000);
     dispatch({ type: "start" });
   };
 
   const replay = () => {
-    setTimeout(() => tick(), 1000);
+    window.setTimeout(() => tick(), 1000);
     dispatch({ type: "replay" });
   };
 
   const tick = () => {
-    var timeout = setTimeout(() => tick(), 1000);
+    var timeout = window.setTimeout(() => tick(), 1000);
     dispatch({ type: "playPattern", timeout: timeout });
   };
 
