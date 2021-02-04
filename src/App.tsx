@@ -1,8 +1,22 @@
 import React, { useReducer, useRef, useEffect } from "react";
-import Lights from "./Lights.js";
+import Lights from "./Lights";
 import "./App.css";
 
-const reducer = (state, action) => {
+interface State {
+  gameState: string;
+  pattern: number[];
+  patternToPlay: number[];
+  incomingPattern: number[];
+  light: number | null;
+}
+
+interface Action {
+  type: string;
+  number?: number;
+  timeout?: any;
+}
+
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "start":
       const patt = [1, 2, 3, 4].sort(() => Math.random() - 0.5);
@@ -10,6 +24,7 @@ const reducer = (state, action) => {
     case "replay":
       return { ...state, patternToPlay: state.pattern, gameState: "play" };
     case "lightClick":
+      if (!action.number) return state;
       const newPattern = [...state.incomingPattern, action.number];
       if (newPattern.slice(state.pattern.length * -1).join() === state.pattern.join()) {
         return { ...state, incomingPattern: newPattern, gameState: "win" };
@@ -31,7 +46,7 @@ const reducer = (state, action) => {
   }
 };
 
-function usePrevious(value) {
+function usePrevious(value: any): any {
   const ref = useRef();
   useEffect(() => {
     ref.current = value;
@@ -82,8 +97,8 @@ function App() {
           dispatch({ type: "lightClick", number: i });
         }}
       ></Lights>
-      <button onClick={() => start()}>Start</button>
-      <button onClick={() => replay()}>Replay</button>
+      <button onClick={start}>Start</button>
+      <button onClick={replay}>Replay</button>
     </div>
   );
 }
